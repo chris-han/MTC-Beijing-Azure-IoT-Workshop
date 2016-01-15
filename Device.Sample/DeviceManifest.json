@@ -49,6 +49,10 @@
         {
           "deviceId": "MTC_Simulator001",
           "deviceSecret": "HostName=http://iot68f1a298apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator001;SharedAccessKey=fpA3FME+D15LQvGpQ0o+Giy8udNoQAPmcVfCP53+3y8="
+        },
+        {
+          "deviceId": "MTC_Simulator002",
+          "deviceSecret": "HostName=http://iot68f1a298apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator002;SharedAccessKey=OXMwHXEcqjtucbBlrRr3ElNlJhB39MPQeegyhQ6p+gQ="
         }
       ],
       "jobs": [
