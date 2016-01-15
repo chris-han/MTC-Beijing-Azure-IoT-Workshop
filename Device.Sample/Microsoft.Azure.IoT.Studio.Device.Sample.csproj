@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3CA8949-FFA3-4FEA-8B0D-0F9FF34F4DA8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Azure.IoT.Studio.Device</RootNamespace>
+    <AssemblyName>Microsoft.Azure.IoT.Studio.Device.Sample</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NoAggravatedSerialization</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <IoTHubSDK>Official</IoTHubSDK>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <IoTHubSDK>Official</IoTHubSDK>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugPrivate|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugPrivate\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NoAggravatedSerialization;PrivateIoTHubSDK</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <IoTHubSDK>Private</IoTHubSDK>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleasePrivate|AnyCPU'">
+    <OutputPath>bin\ReleasePrivate\</OutputPath>
+    <DefineConstants>TRACE;PrivateIoTHubSDK</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <IoTHubSDK>Private</IoTHubSDK>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Condition="'$(IoTHubSDK)' == 'Official'" Include="Microsoft.Azure.Amqp">
+      <HintPath>SDK\Official\Microsoft.Azure.Amqp.dll</HintPath>
+    </Reference>
+    <Reference Condition="'$(IoTHubSDK)' == 'Private'" Include="Microsoft.Azure.Amqp">
+      <HintPath>SDK\Private\Microsoft.Azure.Amqp.dll</HintPath>
+    </Reference>
+    <Reference Condition="'$(IoTHubSDK)' == 'Official'" Include="Microsoft.Azure.Devices">
+      <HintPath>SDK\Official\Microsoft.Azure.Devices.dll</HintPath>
+    </Reference>
+    <Reference Condition="'$(IoTHubSDK)' == 'Private'" Include="Microsoft.Azure.Devices">
+      <HintPath>SDK\Private\Microsoft.Azure.Devices.dll</HintPath>
+    </Reference>
+    <Reference Condition="'$(IoTHubSDK)' == 'Official'" Include="Microsoft.Azure.Devices.Client">
+      <HintPath>SDK\Official\Microsoft.Azure.Devices.Client.dll</HintPath>
+    </Reference>
+    <Reference Condition="'$(IoTHubSDK)' == 'Private'" Include="Microsoft.Azure.Devices.Client">
+      <HintPath>SDK\Private\Microsoft.Azure.Devices.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandLineArguments.cs" />
+    <Compile Include="DeviceEngine.cs" />
+    <Compile Include="DeviceTemplate\DeviceBlueprint.cs" />
+    <Compile Include="DeviceTemplate\DeviceTemplate.cs" />
+    <Compile Include="Device.cs" />
+    <Compile Include="DeviceTemplate\FilterDesc.cs" />
+    <Compile Include="DeviceTemplate\GlobalSettings.cs" />
+    <Compile Include="DeviceTemplate\JobDesc.cs" />
+    <Compile Include="Extensions\ActivatorExternsion.cs" />
+    <Compile Include="Filters\Source\CloudGateway.cs" />
+    <Compile Include="Filters\Sink\CloudGateway.cs" />
+    <Compile Include="Filters\Source\DataGeneratorHost.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transport\HTTPTransport.cs" />
+    <Compile Include="Transport\IoTHubTransport.cs" />
+    <Compile Include="Transport\ITransport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Device.DataGenerators\Base\Microsoft.Azure.IoT.Studio.Device.DataGenerator.Base.csproj">
+      <Project>{9c1e97e2-6c42-4b40-8cff-696272d9e8e5}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.DataGenerator.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.DataGenerators\PeriodicMotorTemperature\Microsoft.Azure.IoT.Studio.Device.DataGenerator.PeriodicMotorTemperature.csproj">
+      <Project>{22ef6ed6-e4f1-4aa8-907c-06551801cf32}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.DataGenerator.PeriodicMotorTemperature</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.DataGenerators\Sine\Microsoft.Azure.IoT.Studio.Device.DataGenerator.Sine.csproj">
+      <Project>{ecab1d6a-70d0-4769-b3ad-c05a8d539830}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.DataGenerator.Sine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Base\Microsoft.Azure.IoT.Studio.Device.Filter.Base.csproj">
+      <Project>{4b081202-fd56-40f5-ae18-ba2f7638577f}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Intermedia\ConsoleOutput\Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.ConsoleOutput.csproj">
+      <Project>{1c04d9e3-3470-4cf6-bb99-e6910a229772}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.ConsoleOutput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Intermedia\JsonSerializer\Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.JsonSerializer.csproj">
+      <Project>{000f292e-567d-4911-8f0d-a189af3fb364}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.JsonSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Intermedia\UTF8Decoding\Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.UTF8Decoding.csproj">
+      <Project>{8e430e50-dc69-49cb-b18a-d621ebd62500}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.UTF8Decoding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Intermedia\UTF8Encoding\Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.UTF8Encoding.csproj">
+      <Project>{8fe28a66-fe19-43e8-b82a-ae53a9bf3a17}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia.UTF8Encoding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Sink\BasicQueue\Microsoft.Azure.IoT.Studio.Device.Filter.Sink.BasicQueue.csproj">
+      <Project>{39a1baf5-249c-41de-ac31-4ba7e9b29c8f}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Sink.BasicQueue</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Sink\Null\Microsoft.Azure.IoT.Studio.Device.Filter.Sink.Null.csproj">
+      <Project>{cd1d9a21-e140-4741-ba1d-a37a25c551c4}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Sink.Null</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Device.Filters\Source\BasicQueue\Microsoft.Azure.IoT.Studio.Device.Filter.Source.BasicQueue.csproj">
+      <Project>{8afcf1ed-f62e-4260-a638-9270ce5925f4}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Source.BasicQueue</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataGenerator\" />
+    <Folder Include="Filters\Intermedia\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

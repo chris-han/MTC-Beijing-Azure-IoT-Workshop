@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Microsoft.Azure.IoT.Studio.Tool.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">HostName=http://localhost:81;SharedAccessKeyName=owner;SharedAccessKey=EIkm7aqTUEncMac9wcKfNt82lrpGK6WO+vra6rwyVog=</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,138 @@
+{
+  "$schema": "Schema/deviceTemplate.json",
+  "globalSettings": {
+    "namespaceAliases": [
+      {
+        "alias": "DataGenerator",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.DataGenerator"
+      },
+      {
+        "alias": "Source",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Source"
+      },
+      {
+        "alias": "Intermedia",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia"
+      },
+      {
+        "alias": "Sink",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Sink"
+      }
+    ],
+    "defaultParameters": [
+      {
+        "type": "Source.CloudGateway",
+        "parameters": {
+          "host": "",
+          "port": "0"
+        }
+      },
+      {
+        "type": "Sink.CloudGateway",
+        "parameters": {
+          "host": "",
+          "port": "0"
+        }
+      },
+      {
+        "type": "Intermedia.ConsoleOutput",
+        "parameters": {
+          "interestingField": "stringContent"
+        }
+      }
+    ]
+  },
+  "deviceGroups": [
+    {
+      "name": "group001",
+      "devices": [
+        {
+          "deviceId": "MTC_Simulator001",
+          "deviceSecret": "HostName=http://iot68f1a298apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator001;SharedAccessKey=fpA3FME+D15LQvGpQ0o+Giy8udNoQAPmcVfCP53+3y8="
+        }
+      ],
+      "jobs": [
+        {
+          "name": "sendMessage",
+          "interval": "1000",
+          "sourceFilter": {
+            "name": "sensor",
+            "type": "Source.DataGeneratorHost",
+            "parameters": {
+              "dataGenerator": "DataGenerator.PeriodicMotorTemperature",
+              "parameters": {
+                "Boundary": {
+                  "max": "110.0",
+                  "min": "35.0"
+                },
+                "UpDecayMult": "1.1111111111111111111111111111111",
+                "InitMult": "0.1",
+                "DownDecayMult": "0.02777777777777777777777777777778",
+                "StepsThreshold": "5",
+                "HeatingProb": "0.1",
+                "CoolingFailureProb": "0.1",
+                "SensorFailureProb": "0.0104807417937856073537698295802",
+                "SensorFailureBoundary": {
+                  "max": "300.0",
+                  "min": "0.0"
+                },
+                "Fluctuating": {
+                  "max": "1.02",
+                  "min": "0.98"
+                }
+              }
+            }
+          },
+          "intermediaFilters": [
+            {
+              "name": "serializer",
+              "type": "Intermedia.JsonSerializer"
+            },
+            {
+              "name": "messageDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "sending message {0}",
+                "foregroundColor": "White"
+              }
+            },
+            {
+              "name": "encoder",
+              "type": "Intermedia.UTF8Encoding"
+            }
+          ],
+          "sinkFilter": {
+            "name": "sender",
+            "type": "Sink.CloudGateway"
+          }
+        },
+        {
+          "name": "receiveCommand",
+          "interval": "2000",
+          "sourceFilter": {
+            "name": "receiver",
+            "type": "Source.CloudGateway"
+          },
+          "intermediaFilters": [
+            {
+              "name": "decoder",
+              "type": "Intermedia.UTF8Decoding"
+            },
+            {
+              "name": "commandDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "received command {0}",
+                "foregroundColor": "Yellow"
+              }
+            }
+          ],
+          "sinkFilter": {
+            "name": "nullSink",
+            "type": "Sink.Null"
+          }
+        }
+      ]
+    }
+  ]
+}

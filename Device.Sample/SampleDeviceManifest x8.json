@@ -1,0 +1,261 @@
+{
+  "$schema": "Schema/deviceTemplate.json",
+  "globalSettings": {
+    "namespaceAliases": [
+      {
+        "alias": "DataGenerator",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.DataGenerator"
+      },
+      {
+        "alias": "Source",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Source"
+      },
+      {
+        "alias": "Intermedia",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia"
+      },
+      {
+        "alias": "Sink",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Sink"
+      }
+    ],
+    "defaultParameters": [
+      {
+        "type": "Source.CloudGateway",
+        "parameters": {
+          "host": "",
+          "port": "80"
+        }
+      },
+      {
+        "type": "Sink.CloudGateway",
+        "parameters": {
+          "host": "",
+          "port": "80"
+        }
+      },
+      {
+        "type": "Intermedia.ConsoleOutput",
+        "parameters": {
+          "interestingField": "stringContent"
+        }
+      }
+    ]
+  },
+  "deviceGroups": [
+    {
+      "name": "group001",
+      "devices": [
+        {
+          "deviceId": "Simulator001",
+          "deviceSecret": ""
+        },
+        {
+          "deviceId": "Simulator002",
+          "deviceSecret": ""
+        },
+        {
+          "deviceId": "Simulator003",
+          "deviceSecret": ""
+        },
+        {
+          "deviceId": "Simulator004",
+          "deviceSecret": ""
+        }
+      ],
+      "jobs": [
+        {
+          "name": "sendMessagePreQueue",
+          "interval": "1000",
+          "sourceFilter": {
+            "name": "sensor",
+            "type": "Source.DataGeneratorHost",
+            "parameters": {
+              "dataGenerator": "DataGenerator.PeriodicMotorTemperature",
+              "parameters": {
+                "Boundary": {
+                  "max": "110.0",
+                  "min": "35.0"
+                },
+                "UpDecayMult": "1.1111111111111111111111111111111",
+                "InitMult": "0.1",
+                "DownDecayMult": "0.02777777777777777777777777777778",
+                "StepsThreshold": "5",
+                "HeatingProb": "0.1",
+                "CoolingFailureProb": "0.1",
+                "SensorFailureProb": "0.0104807417937856073537698295802",
+                "SensorFailureBoundary": {
+                  "max": "300.0",
+                  "min": "0.0"
+                },
+                "Fluctuating": {
+                  "max": "1.02",
+                  "min": "0.98"
+                }
+              }
+            }
+          },
+          "sinkFilter": {
+            "name": "queueWritter",
+            "type": "Sink.BasicQueue",
+            "parameters": {
+              "queueID": "theQueue"
+            }
+          }
+        },
+        {
+          "name": "sendMessagePostQueue",
+          "interval": "5000",
+          "sourceFilter": {
+            "name": "queueReader",
+            "type": "Source.BasicQueue",
+            "parameters": {
+              "queueID": "theQueue"
+            }
+          },
+          "intermediaFilters": [
+            {
+              "name": "serializer",
+              "type": "Intermedia.JsonSerializer"
+            },
+            {
+              "name": "messageDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "sending message {0}",
+                "foregroundColor": "White"
+              }
+            },
+            {
+              "name": "encoder",
+              "type": "Intermedia.UTF8Encoding"
+            }
+          ],
+          "sinkFilter": {
+            "name": "sender",
+            "type": "Sink.CloudGateway"
+          }
+        },
+        {
+          "name": "receiveCommand",
+          "interval": "2000",
+          "sourceFilter": {
+            "name": "receiver",
+            "type": "Source.CloudGateway"
+          },
+          "intermediaFilters": [
+            {
+              "name": "decoder",
+              "type": "Intermedia.UTF8Decoding"
+            },
+            {
+              "name": "commandDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "received command {0}",
+                "foregroundColor": "Red"
+              }
+            }
+          ],
+          "sinkFilter": {
+            "name": "nullSink",
+            "type": "Sink.Null"
+          }
+        }
+      ]
+    },
+    {
+      "name": "group002",
+      "devices": [
+        {
+          "deviceId": "Simulator101",
+          "deviceSecret": ""
+        },
+        {
+          "deviceId": "Simulator102",
+          "deviceSecret": ""
+        },
+        {
+          "deviceId": "Simulator103",
+          "deviceSecret": ""
+        },
+        {
+          "deviceId": "Simulator104",
+          "deviceSecret": ""
+        }
+      ],
+      "jobs": [
+        {
+          "name": "sendMessage",
+          "interval": "1000",
+          "sourceFilter": {
+            "name": "sensor",
+            "type": "Source.DataGeneratorHost",
+            "parameters": {
+              "dataGenerator": "DataGenerator.Sine",
+              "parameters": {
+                "Boundary": {
+                  "max": "55.0",
+                  "min": "35.0"
+                },
+                "Period": "20",
+                "Fluctuating": {
+                  "max": "1.02",
+                  "min": "0.98"
+                }
+              }
+            }
+          },
+          "intermediaFilters": [
+            {
+              "name": "serializer",
+              "type": "Intermedia.JsonSerializer"
+            },
+            {
+              "name": "messageDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "sending message {0}",
+                "foregroundColor": "DarkYellow"
+              }
+            },
+            {
+              "name": "encoder",
+              "type": "Intermedia.UTF8Encoding"
+            }
+          ],
+          "sinkFilter": {
+            "name": "sender",
+            "type": "Sink.CloudGateway"
+          }
+        },
+        {
+          "name": "receiveCommand",
+          "interval": "2000",
+          "sourceFilter": {
+            "name": "receiver",
+            "type": "Source.CloudGateway"
+          },
+          "intermediaFilters": [
+            {
+              "name": "decoder",
+              "type": "Intermedia.UTF8Decoding"
+            },
+            {
+              "name": "commandDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "received command {0}",
+                "foregroundColor": "Yellow"
+              }
+            }
+          ],
+          "sinkFilter": {
+            "name": "nullSink",
+            "type": "Sink.Null"
+          }
+        }
+      ]
+    }
+  ]
+}
