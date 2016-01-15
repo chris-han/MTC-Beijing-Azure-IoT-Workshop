@@ -43,6 +43,23 @@ namespace Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia
 
             return dataset;
         }
+        public async Task<DataSet> Process(DataSet dataset, CancellationToken ct, string DeviceId)
+        {
+            foreach (var data in dataset)
+            {
+                data["DeviceId"] = DeviceId;//Chris han add DeviceId to Json
+                object fieldObject;
+                if (data.TryGetValue(_interestringField, out fieldObject))
+                {
+                    string message = string.Format(CultureInfo.InvariantCulture, _format, fieldObject);
+
+                    Console.ForegroundColor = _foregroundColor;
+                    Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} Device [{1}] {2}", DateTime.Now, _deviceId, message));
+                }
+            }
+
+            return dataset;
+        }
 #pragma warning restore 1998
     }
 }

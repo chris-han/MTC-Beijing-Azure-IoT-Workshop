@@ -39,7 +39,8 @@ namespace Microsoft.Azure.IoT.Studio.Device.DataGenerator
             _t += _delta;
 
             var output = new Data();
-            output.Add("SensorValue", (Math.Sin(_t) * _k + _b) * _rand.Next(Fluctuating));
+            output.Add("Temp", (Math.Sin(_t) * _k + _b) * _rand.Next(Fluctuating));
+            output.Add("Volt", 200 + 20 * _rand.Next(Fluctuating)); //200 +- 20 V
             return output;
         }
     }

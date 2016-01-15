@@ -27,6 +27,22 @@ namespace Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia
 
             return dataset;
         }
+        public async Task<DataSet> Process(DataSet dataset, CancellationToken ct, string DeviceId)
+        {
+            foreach (var data in dataset)
+            {
+                data["DeviceId"] = DeviceId;//Chris han add DeviceId to Json
+                var content = data.GetField<byte[]>("bytesContent");
+                if (content == null)
+                {
+                    continue;
+                }
+
+                data.Add("stringContent", Encoding.UTF8.GetString(content));
+            }
+
+            return dataset;
+        }
 #pragma warning restore 1998
     }
 }

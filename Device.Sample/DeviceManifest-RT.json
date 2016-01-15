@@ -1,0 +1,133 @@
+{
+  "$schema": "deviceTemplate.json",
+  "globalSettings": {
+    "namespaceAliases": [
+      {
+        "alias": "DataGenerator",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.DataGenerator"
+      },
+      {
+        "alias": "Source",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Source"
+      },
+      {
+        "alias": "Intermedia",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia"
+      },
+      {
+        "alias": "Sink",
+        "namespace": "Microsoft.Azure.IoT.Studio.Device.Filter.Sink"
+      }
+    ],
+    "defaultParameters": [
+      {
+        "type": "Source.CloudGateway",
+        "parameters": {
+          "host": "",
+          "port": "0"
+        }
+      },
+      {
+        "type": "Sink.CloudGateway",
+        "parameters": {
+          "host": "",
+          "port": "0"
+        }
+      },
+      {
+        "type": "Intermedia.ConsoleOutput",
+        "parameters": {
+          "interestingField": "stringContent"
+        }
+      }
+    ]
+  },
+  "deviceGroups": [
+    {
+      "name": "group001",
+      "devices": [
+        {
+          "deviceId": "MTC_Simulator_RT_001",
+          "deviceSecret": "HostName=http://iot70606034apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator_RT_001;SharedAccessKey=YZtwIz8HkOGmNhQrnNwRPows2NGUQN3AiwmMBf9iiDg="
+        },
+        {
+          "deviceId": "MTC_Simulator_RT_002",
+          "deviceSecret": "HostName=http://iot70606034apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator_RT_002;SharedAccessKey=y3cl5rEVVPVuuoz3P0+ra7s53bjBaz7S38JJc3iLQmI="
+        }
+      ],
+      "jobs": [
+        {
+          "name": "sendMessage",
+          "interval": "1000",
+          "sourceFilter": {
+            "name": "sensor",
+            "type": "Source.DataGeneratorHost",
+            "parameters": {
+              "dataGenerator": "DataGenerator.Sine",
+              "parameters": {
+                "DeviceId": "did",
+                "Boundary": {
+                  "max": "55.0",
+                  "min": "35.0"
+                },
+                "Period": "20",
+                "Fluctuating": {
+                  "max": "1.02",
+                  "min": "0.98"
+                }
+              }
+            }
+          },
+          "intermediaFilters": [
+            {
+              "name": "serializer",
+              "type": "Intermedia.JsonSerializer"
+            },
+            {
+              "name": "messageDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "sending message {0}",
+                "foregroundColor": "White"
+              }
+            },
+            {
+              "name": "encoder",
+              "type": "Intermedia.UTF8Encoding"
+            }
+          ],
+          "sinkFilter": {
+            "name": "sender",
+            "type": "Sink.CloudGateway"
+          }
+        },
+        {
+          "name": "receiveCommand",
+          "interval": "2000",
+          "sourceFilter": {
+            "name": "receiver",
+            "type": "Source.CloudGateway"
+          },
+          "intermediaFilters": [
+            {
+              "name": "decoder",
+              "type": "Intermedia.UTF8Decoding"
+            },
+            {
+              "name": "commandDumper",
+              "type": "Intermedia.ConsoleOutput",
+              "parameters": {
+                "format": "received command {0}",
+                "foregroundColor": "Yellow"
+              }
+            }
+          ],
+          "sinkFilter": {
+            "name": "nullSink",
+            "type": "Sink.Null"
+          }
+        }
+      ]
+    }
+  ]
+}

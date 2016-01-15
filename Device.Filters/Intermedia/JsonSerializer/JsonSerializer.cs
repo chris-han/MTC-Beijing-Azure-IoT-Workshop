@@ -43,5 +43,39 @@ namespace Microsoft.Azure.IoT.Studio.Device.Filter.Intermedia
             return dataset;
 #endif
         }
+
+        //Chris Han add DeviceId to Json
+        public async Task<DataSet> Process(DataSet dataset, CancellationToken ct, string DeviceId)
+        {
+#if AggravatedSerialization
+            //Serialize the whole dataset as single json string
+            var json = await Task.Factory.StartNew(
+                new Func<object, string>(JsonConvert.SerializeObject),
+                dataset,
+                ct);
+
+            var data = new Data();
+            data.Add("stringContent", json);
+
+            var output = new DataSet();
+            output.Add(data);
+            return output;
+
+#else
+            //Serialize each data as one json string
+            foreach (var data in dataset)
+            {
+                data["DeviceId"] = DeviceId;//Chris han add DeviceId to Json
+                var json = await Task.Factory.StartNew(
+                    new Func<object, string>(JsonConvert.SerializeObject),
+                    data,
+                    ct);
+
+                data.Add("stringContent", json);
+            }
+
+            return dataset;
+#endif
+        }
     }
 }

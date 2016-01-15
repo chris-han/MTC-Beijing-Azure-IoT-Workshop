@@ -40,6 +40,13 @@ namespace Microsoft.Azure.IoT.Studio.Device
                     var sourceFilter = ActivatorExternsion.CreateInstance<ISource>(job.Source.Type);
                     sourceFilter.Initialize(job.Source.Parameters, this);
 
+                    //Chris Han - try to inject DeviceId
+                    //Newtonsoft.Json.Linq.JObject did = (Newtonsoft.Json.Linq.JObject)job.Source.Parameters;//.Value<Newtonsoft.Json.Linq.JToken>("DeviceId");
+                    //var p = did["parameters"]["DeviceId"];
+                    //var k = DeviceId;
+
+                    sourceFilter.Initialize(job.Source.Parameters, this);
+
                     var intermediaFilters = job.Intermedias.Select(f =>
                     {
                         var filter = ActivatorExternsion.CreateInstance<IIntermedia>(f.Type);
@@ -92,7 +99,8 @@ namespace Microsoft.Azure.IoT.Studio.Device
                     //Process data set by intermedia filters
                     foreach (var intermedia in intermedias)
                     {
-                        dataset = await intermedia.Process(dataset, ct);
+                        //dataset = await intermedia.Process(dataset, ct);
+                        dataset = await intermedia.Process(dataset, ct, DeviceId);//Chris Han add DeviceId to Json
                         if (dataset == null || !dataset.Any())
                         {
                             //Skip current loop if no data read, or filter is in status "stopping"
