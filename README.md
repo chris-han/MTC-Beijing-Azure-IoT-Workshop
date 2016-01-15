@@ -12,12 +12,12 @@ How to setup the device management tool "DMConsole"?
 	          value
 	Replace the value with IoTEntry connection string (it could be found at IoTStudio portal)
 
-#########################################
+##########################################
 How to register new device by DMConsole?
 Microsoft.Azure.IoT.Studio.Tool.DMConsole /a:AddDevice /d:<deviceID>
 i.e. 
 	"C:\IOT Workshop\IoTStudio\Binary\DMConsole\Microsoft.Azure.IoT.Studio.Tool.DMConsole.exe" /a:AddDevice /d:MTC_Simulator002
-########################################
+##########################################
 
 How to unregister device by DMConsole?
 Microsoft.Azure.IoT.Studio.Tool.DMConsole /a:RemoveDevice /d:<deviceID>
