@@ -134,13 +134,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DeviceManifest-RT.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="DeviceManifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="VendingManifest-RT.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Device.DataGenerators\Base\Microsoft.Azure.IoT.Studio.Device.DataGenerator.Base.csproj">
