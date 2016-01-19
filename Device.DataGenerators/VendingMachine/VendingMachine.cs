@@ -5,42 +5,55 @@ namespace Microsoft.Azure.IoT.Studio.Device.DataGenerator
     internal class VendingMachine:Base
     {
         [DataGeneratorParameter]
-        public Range Boundary { get; private set; }
+        public Range VoltdropBoundary { get; private set; }
 
         [DataGeneratorParameter]
-        public int Period { get; private set; }
+        public Range PowerdrawBoundary { get; private set; }
 
         [DataGeneratorParameter]
-        public Range Fluctuating { get; private set; }
+        public Range DutycycleBoundary { get; private set; }
 
-        private double _t;
-        private double _delta;
-        private double _k;
-        private double _b;
+        [DataGeneratorParameter]
+        public Range VibrationBoundary { get; private set; }
+
+        [DataGeneratorParameter]
+        public Range TemperaturBoundary { get; private set; }
+
+        private double _voltdrop;
+        private double _powerdraw;
+        private double _dutycycle;
+        private double _vibration;
+        private double _temperature;
 
         public VendingMachine()
         {
-            Boundary = new Range(max: 55.0, min: 35.0);
-            Period = 30;
+            VoltdropBoundary = new Range(max: 55, min: 30);
+            PowerdrawBoundary = new Range(max: 50, min: 5);
+            DutycycleBoundary = new Range(max: 1, min: 0); //(0~10)/10
+            VibrationBoundary = new Range(max: 390, min: 30); //(0~12)*30+30
+            TemperaturBoundary = new Range(max: 41, min: 35);
+
         }
 
         public override void OnInitialize()
         {
-            _t = 0;
-            _delta = 2 * Math.PI / Period;
-            _k = Boundary.Size / 2;
-            _b = Boundary.Max - _k;
+            _voltdrop= VoltdropBoundary.Min;
+            _powerdraw= PowerdrawBoundary.Min;
+            _dutycycle= DutycycleBoundary.Min;
+            _vibration= VibrationBoundary.Min;
+            _temperature= TemperaturBoundary.Min;
 
-            Range = Boundary;
+
         }
 
         public override Data Read()
         {
-            _t += _delta;
-
             var output = new Data();
-            output.Add("Temp", (Math.Sin(_t) * _k + _b) * _rand.Next(Fluctuating));
-            output.Add("Volt", 200 + 20 * _rand.Next(Fluctuating)); //200 +- 20 V
+            output.Add("voltdrop", _rand.Next(VoltdropBoundary));
+            output.Add("powerdraw", _rand.Next(PowerdrawBoundary));
+            output.Add("dutycycle", _rand.Next(DutycycleBoundary));
+            output.Add("vibration", _rand.Next(VibrationBoundary));
+            output.Add("temperature", _rand.Next(TemperaturBoundary));
             return output;
         }
     }

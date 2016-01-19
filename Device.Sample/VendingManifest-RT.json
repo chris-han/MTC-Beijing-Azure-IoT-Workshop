@@ -74,14 +74,25 @@
               "dataGenerator": "DataGenerator.VendingMachine",
               "parameters": {
                 "DeviceId": "did",
-                "Boundary": {
+                "VoltdropBoundary": {
                   "max": "55.0",
-                  "min": "35.0"
+                  "min": "30.0"
                 },
-                "Period": "20",
-                "Fluctuating": {
-                  "max": "1.02",
-                  "min": "0.98"
+                "PowerdrawBoundary": {
+                  "max": "50.0",
+                  "min": "5.0"
+                },
+                "DutycycleBoundary": {
+                  "max": "1.0",
+                  "min": "0"
+                },
+                "VibrationBoundary": {
+                  "max": "390",
+                  "min": "30"
+                },
+                "TemperaturBoundary": {
+                  "max": "41",
+                  "min": "35"
                 }
               }
             }
