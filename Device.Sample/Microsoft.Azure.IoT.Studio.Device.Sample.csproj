@@ -153,6 +153,10 @@
       <Project>{ecab1d6a-70d0-4769-b3ad-c05a8d539830}</Project>
       <Name>Microsoft.Azure.IoT.Studio.Device.DataGenerator.Sine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Device.DataGenerators\VendingMachine\Microsoft.Azure.IoT.Studio.Device.DataGenerator.VendingMachine.csproj">
+      <Project>{6e07b163-8056-45fe-be62-d5f761c6deb1}</Project>
+      <Name>Microsoft.Azure.IoT.Studio.Device.DataGenerator.VendingMachine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Device.Filters\Base\Microsoft.Azure.IoT.Studio.Device.Filter.Base.csproj">
       <Project>{4b081202-fd56-40f5-ae18-ba2f7638577f}</Project>
       <Name>Microsoft.Azure.IoT.Studio.Device.Filter.Base</Name>
@@ -199,7 +203,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataGenerator\" />
     <Folder Include="Filters\Intermedia\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

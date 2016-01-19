@@ -47,19 +47,19 @@
       "name": "group001",
       "devices": [
         {
-          "deviceId": "MTC_Simulator_RT_001",
+          "deviceId": "MTC_Vending_RT_001",
           "deviceSecret": "HostName=http://iot70606034apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator_RT_001;SharedAccessKey=YZtwIz8HkOGmNhQrnNwRPows2NGUQN3AiwmMBf9iiDg="
         },
         {
-          "deviceId": "MTC_Simulator_RT_002",
+          "deviceId": "MTC_Vending_RT_002",
           "deviceSecret": "HostName=http://iot70606034apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator_RT_002;SharedAccessKey=y3cl5rEVVPVuuoz3P0+ra7s53bjBaz7S38JJc3iLQmI="
         },
         {
-          "deviceId": "MTC_Simulator_RT_003",
+          "deviceId": "MTC_Vending_RT_003",
           "deviceSecret": "HostName=http://iot70606034apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator_RT_003;SharedAccessKey=x8gOi1GEc9UU4tOLjZJOCTeVSPxo1rZT/E89MUwaBp4="
         },
         {
-          "deviceId": "MTC_Simulator_RT_004",
+          "deviceId": "MTC_Vending_RT_004",
           "deviceSecret": "HostName=http://iot70606034apics.chinacloudapp.cn;CredentialScope=Device;DeviceId=MTC_Simulator_RT_004;SharedAccessKey=eNzeMxcrA5XVr/KoRIGypcyzBt3bbUY2YgIMBKVNNOc="
         }
       ],
@@ -71,7 +71,7 @@
             "name": "sensor",
             "type": "Source.DataGeneratorHost",
             "parameters": {
-              "dataGenerator": "DataGenerator.Sine",
+              "dataGenerator": "DataGenerator.VendingMachine",
               "parameters": {
                 "DeviceId": "did",
                 "Boundary": {

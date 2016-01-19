@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Azure.IoT.Studio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Azure.IoT.Studio.Device.Filter.Source.BasicQueue", "..\Device.Filters\Source\BasicQueue\Microsoft.Azure.IoT.Studio.Device.Filter.Source.BasicQueue.csproj", "{8AFCF1ED-F62E-4260-A638-9270CE5925F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Azure.IoT.Studio.Device.DataGenerator.VendingMachine", "..\Device.DataGenerators\VendingMachine\Microsoft.Azure.IoT.Studio.Device.DataGenerator.VendingMachine.csproj", "{6E07B163-8056-45FE-BE62-D5F761C6DEB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,14 @@ Global
 		{8AFCF1ED-F62E-4260-A638-9270CE5925F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AFCF1ED-F62E-4260-A638-9270CE5925F4}.ReleasePrivate|Any CPU.ActiveCfg = Release|Any CPU
 		{8AFCF1ED-F62E-4260-A638-9270CE5925F4}.ReleasePrivate|Any CPU.Build.0 = Release|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.DebugPrivate|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.DebugPrivate|Any CPU.Build.0 = Debug|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.ReleasePrivate|Any CPU.ActiveCfg = Release|Any CPU
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1}.ReleasePrivate|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,5 +170,6 @@ Global
 		{39A1BAF5-249C-41DE-AC31-4BA7E9B29C8F} = {2773516B-9394-4A31-B2E5-A54D912DDFA1}
 		{CD1D9A21-E140-4741-BA1D-A37A25C551C4} = {2773516B-9394-4A31-B2E5-A54D912DDFA1}
 		{8AFCF1ED-F62E-4260-A638-9270CE5925F4} = {4BF4B898-5BC1-4DEE-AED1-1830967057CD}
+		{6E07B163-8056-45FE-BE62-D5F761C6DEB1} = {8A495ED2-EC5B-4474-91A0-F5CF961C9848}
 	EndGlobalSection
 EndGlobal
